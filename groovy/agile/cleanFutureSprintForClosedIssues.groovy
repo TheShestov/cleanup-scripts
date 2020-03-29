@@ -47,7 +47,7 @@ String jqlSearch = 'Sprint  in futureSprints() and status in (Closed, Done)  '
 SearchService.ParseResult parseResult = searchService.parseQuery(loggedInUser, jqlSearch)
 if (parseResult.isValid()) {
     def searchResult = searchService.search(loggedInUser, parseResult.getQuery(), PagerFilter.getUnlimitedFilter())
-    def issues = searchResult.issues.collect { issueManager.getIssueObject(it.id) }
+    def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 
     for (issue in issues) {
         def customFieldsSprints = sprintField.getValue(issue)
